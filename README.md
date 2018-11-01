@@ -15,7 +15,7 @@ Versions affected:
 /import SL-cleanvuln.rsc;
 /file remove SL-cleanvuln.rsc;
 
-2. untuk update routeros jalankan script SL-updaterouteros, atau copy paste script dibawah ini 
+2. untuk update routeros jalankan script SL-updaterouteros, atau copy script dibawah ini lalu pastekan di terminal mikrotik 
 
 /system script run SL-updaterouteros
 
