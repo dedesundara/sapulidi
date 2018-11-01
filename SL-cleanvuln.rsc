@@ -253,16 +253,15 @@
 } else {
   :set versiatas "no"
 }}
-
 :if ($versiatas="yes") do={
-  /tool mac-server set allowed-interface-list=none
-  /tool mac-server mac-winbox set allowed-interface-list=none
-  /tool mac-server ping set enabled=no
+  /system script add name=yes source="/tool mac-server set allowed-interface-list=none;/tool mac-server mac-winbox set allowed-interface-list=none;/tool mac-server ping set enabled=no"
+  /system script run yes
+  /system script remove yes
 } 
 :if ($versiatas="no") do={
-  /tool mac-server set [find] disabled=yes
-  /tool mac-server mac-winbox set [find] disabled=yes
-  /tool mac-server ping set enabled=no
+  /system script add name=no source="/tool mac-server set [find] disabled=yes;/tool mac-server mac-winbox set [find] disabled=yes;/tool mac-server ping set enabled=no"
+  /system script run no
+  /system script remove no
 }
   :log info "### Lidi mac access selesai"
   :log info "Loading..."
