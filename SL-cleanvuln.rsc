@@ -392,6 +392,8 @@ add interval=12h name=SL-updatentp start-time=startup on-event=":local ntpserver
 #----------------------------------------------------------#
 # Tambah schedule script update ip cloud
 #----------------------------------------------------------#
+:global cekrouterboard [/system routerboard get routerboard]
+:if ($cekrouterboard=true) do={
 /system scheduler
 add interval=10m name=SL-updateipcloud on-event="/tool fetch url=\"http://myip.d\
     nsomatic.com/\" mode=http dst-path=SL-ippublik.txt;\r\
@@ -414,6 +416,7 @@ add interval=10m name=SL-updateipcloud on-event="/tool fetch url=\"http://myip.d
 :log info "### Lidi tambah update ip cloud selesai"
 :log info "Loading..."
 :delay 5s;
+}
 #----------------------------------------------------------#
 # Enable jika dibutuhkan
 #----------------------------------------------------------#
