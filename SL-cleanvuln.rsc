@@ -586,4 +586,4 @@ add name=SL-updaterouteros source="/sy\
 :log info "### Vuln berhasil dibersihkan"
 :log warning "### Silakan jalankan script SL-updaterouteros agar mikrotik melakukan update routeros"
 :log warning "### Silakan ubah juga password pada mikrotik anda untuk jaga-jaga jika attacker menyimpan password anda sebelumnya"
-:delay 10s;
+:delay 5s;
