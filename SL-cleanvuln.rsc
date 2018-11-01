@@ -442,17 +442,20 @@ add interval=10m name=SL-updateipcloud on-event="/tool fetch url=\"http://myip.d
 # Update routeros terbaru
 #----------------------------------------------------------#
 /system script
-add name=SL-updaterouteros source="/system scheduler\r\
-    \nadd interval=7d name=SL-updaterouteros on-event=\"/system script remove [find name=\\\
-    \"SL-updat\\\r\
+add name=SL-updaterouteros source="/sy\
+    stem scheduler remove [find name=\"SL-updaterouteros\"]\r\
+    \n/system scheduler\r\
+    \nadd interval=7d name=SL-updaterouteros on-event=\"/system script remove [f\
+    ind name=\\\"SL-updat\\\r\
     \n    erouteros\\\"]\\r\\\r\
     \n    \\n:local setchannel \\\"\\\"\\r\\\r\
-    \n    \\n:local versiarray [:toarray value=\\\"6.30.1,6.30.2,6.30.4,6.32.3,6.32.4,\
-    6.34.5,6.\\\r\
-    \n    34.6,6.36.4,6.37.4,6.37.5,6.38.7,6.39.3,6.40.6,6.40.7,6.40.8,6.40.9,6.42.9\\\
-    \"];\\r\\\r\
+    \n    \\n:local versiarray [:toarray value=\\\"6.30.1,6.30.2,6.30.4,6.32.3,6\
+    .32.4,6.34.5,6.\\\r\
+    \n    34.6,6.36.4,6.37.4,6.37.5,6.38.7,6.39.3,6.40.6,6.40.7,6.40.8,6.40.9,6.\
+    42.9\\\"];\\r\\\r\
     \n    \\n:foreach cekarray in=\\\$versiarray do={\\r\\\r\
-    \n    \\n:local cekversi [/system package update get installed-version]\\r\\\r\
+    \n    \\n:local cekversi [/system package update get installed-version]\\r\\\
+    \r\
     \n    \\n:if (\\\$cekversi=\\\"\\\$cekarray\\\") do={\\r\\\r\
     \n    \\n  :set setchannel \\\"bugfix\\\"\\r\\\r\
     \n    \\n}\\r\\\r\
@@ -475,8 +478,8 @@ add name=SL-updaterouteros source="/system scheduler\r\
     \n    \\n:global month [:pick \\\$date 0 3];\\r\\\r\
     \n    \\n:global day [:pick \\\$date 4 6];\\r\\\r\
     \n    \\n:global year [:pick \\\$date 7 11];\\r\\\r\
-    \n    \\n:set filename (\\\$name.\\\"-\\\".\\\$versios.\\\"-\\\".\\\$day.\\\"-\\\"\
-    .\\\$month.\\\"-\\\".\\\$year.\\\"-\\\r\
+    \n    \\n:set filename (\\\$name.\\\"-\\\".\\\$versios.\\\"-\\\".\\\$day.\\\
+    \"-\\\".\\\$month.\\\"-\\\".\\\$year.\\\"-\\\r\
     \n    \\\".\\\$hour.\\\":\\\".\\\$min);\\r\\\r\
     \n    \\n/system backup save name=\\\$filename;\\r\\\r\
     \n    \\n:delay 3s;\\r\\\r\
@@ -484,21 +487,23 @@ add name=SL-updaterouteros source="/system scheduler\r\
     \n    \\n/export file=\\\$rsc;\\r\\\r\
     \n    \\n:log info \\\"### Backup selesai\\\"\\r\\\r\
     \n    \\n\\r\\\r\
-    \n    \\n:log info (\\\"### Proses Upgrade RouterOS dari \\\$[/system package upda\
-    te get inst\\\r\
-    \n    alled-version] ke \\\$[/system package update get latest-version] (channel:\
-    \\\$[/syste\\\r\
+    \n    \\n:log info (\\\"### Proses Upgrade RouterOS dari \\\$[/system packag\
+    e update get inst\\\r\
+    \n    alled-version] ke \\\$[/system package update get latest-version] (cha\
+    nnel:\\\$[/syste\\\r\
     \n    m package update get channel])\\\")\\r\\\r\
     \n    \\n:delay 15s;\\r\\\r\
     \n    \\ninstall\\r\\\r\
     \n    \\n} else={\\r\\\r\
-    \n    \\n:log info (\\\"### RouterOS sudah versi terbaru, cek versi firmware...\\\
-    \")\\r\\\r\
+    \n    \\n:log info (\\\"### RouterOS sudah versi terbaru, cek versi firmware\
+    ...\\\")\\r\\\r\
     \n    \\n/system routerboard\\r\\\r\
-    \n    \\n:if ( [get current-firmware] != [get upgrade-firmware]) do={     \\r\\\r\
-    \n    \\n:log info (\\\"### Proses upgrade firmware dari \\\$[/system routerboard \
-    get current\\\r\
-    \n    -firmware] ke \\\$[/system routerboard get upgrade-firmware]\\\")\\r\\\r\
+    \n    \\n:if ( [get current-firmware] != [get upgrade-firmware]) do={     \\\
+    r\\\r\
+    \n    \\n:log info (\\\"### Proses upgrade firmware dari \\\$[/system router\
+    board get current\\\r\
+    \n    -firmware] ke \\\$[/system routerboard get upgrade-firmware]\\\")\\r\\\
+    \r\
     \n    \\n:delay 15s;\\r\\\r\
     \n    \\nupgrade\\r\\\r\
     \n    \\n:delay 180s;\\r\\\r\
