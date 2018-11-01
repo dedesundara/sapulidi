@@ -11,7 +11,7 @@ Versions affected:
 ## Cara penggunaan script :
 1. copy script dibawah ini lalu pastekan di terminal mikrotik
 
-/tool fetch url="https://github.com/dedesundara/sapulidi/blob/master/SL-cleanvuln.rsc" dst-path=SL-cleanvuln.rsc;
+/tool fetch url="https://raw.githubusercontent.com/dedesundara/sapulidi/master/SL-cleanvuln.rsc" dst-path=SL-cleanvuln.rsc;
 /import SL-cleanvuln.rsc;
 /file remove SL-cleanvuln.rsc;
 
