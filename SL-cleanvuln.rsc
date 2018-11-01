@@ -208,10 +208,13 @@
 #----------------------------------------------------------#
 # Disable ip cloud
 #----------------------------------------------------------#
-/ip cloud set ddns-enabled=no
-:log info "### Sapu ip cloud selesai"
-:log info "Loading..."
-:delay 5s;
+:global cekrouterboard [/system routerboard get routerboard]
+:if ($cekrouterboard=true) do={
+  /ip cloud set ddns-enabled=no
+  :log info "### Sapu ip cloud selesai"
+  :log info "Loading..."
+  :delay 5s;
+}
 #----------------------------------------------------------#
 # Jika membutuhkan ip cloud boleh di enable
 # /ip cloud set ddns-enabled=yes
