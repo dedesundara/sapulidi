@@ -257,14 +257,14 @@
   :set versiatas "no"
 }}
 :if ($versiatas="yes") do={
-  /system script add name=yes source="/tool mac-server set allowed-interface-list=none;/tool mac-server mac-winbox set allowed-interface-list=none;/tool mac-server ping set enabled=no"
-  /system script run yes
-  /system script remove yes
+  /system script add name=SL-yes source="/tool mac-server set allowed-interface-list=none;/tool mac-server mac-winbox set allowed-interface-list=none;/tool mac-server ping set enabled=no"
+  /system script run SL-yes
+  /system script remove SL-yes
 } 
 :if ($versiatas="no") do={
-  /system script add name=no source="/tool mac-server set [find] disabled=yes;/tool mac-server mac-winbox set [find] disabled=yes;/tool mac-server ping set enabled=no"
-  /system script run no
-  /system script remove no
+  /system script add name=SL-no source="/tool mac-server set [find] disabled=yes;/tool mac-server mac-winbox set [find] disabled=yes;/tool mac-server ping set enabled=no"
+  /system script run SL-no
+  /system script remove SL-no
 }
   :log info "### Lidi mac access selesai"
   :log info "Loading..."
@@ -273,7 +273,16 @@
 #----------------------------------------------------------#
 # Disable neighbor
 #----------------------------------------------------------#
-/ip neighbor discovery-settings set discover-interface-list=none
+:if ($versiatas="yes") do={
+  /system script add name=SL-yes source="/ip neighbor discovery-settings set discover-interface-list=none"
+  /system script run SL-yes
+  /system script remove SL-yes
+} 
+:if ($versiatas="no") do={
+  /system script add name=SL-no source=":local neighbors [/ip neighbor discovery find]; :foreach n in=\$neighbors do={ :if ([/ip neighbor discovery get \$n disabled] = no) do={ /ip neighbor discovery set numbers=\$n discover=no; } };"
+  /system script run SL-no
+  /system script remove SL-no
+}
 :log info "### Lidi neighbor selesai"
 :log info "Loading..."
 :delay 5s;
