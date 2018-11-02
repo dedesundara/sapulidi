@@ -42,7 +42,7 @@ https://youtu.be/gAcrUkEFlQM
 * firewall protect CVE-2018-14847, port scanning
 * firewall bruteforce (enable dan sesuaikan port jika anda mengubah service port seperti telnet,ssh,ftp)
 * scheduler update ntp server
-* scheduler update ip cloud
+* scheduler update ip cloud (jika routerboard)
 * scheduler update routeros
 * scheduler update script terbaru sapulidi
 
