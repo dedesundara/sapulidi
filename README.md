@@ -22,6 +22,9 @@ Versions affected:
 3. silakan ubah juga password pada mikrotik anda untuk jaga-jaga jika attacker menyimpan password anda sebelumnya
 4. cek kembali settingan mikrotik anda, jika membutuhkan service yang telah di disable oleh script ini anda boleh enable kembali
 
+### Video tutorial :
+https://youtu.be/gAcrUkEFlQM
+
 ### Tips :
 * #### Tambahkan allowed address untuk remote menggunakan winbox agar lebih aman. 
 * /ip service set winbox disabled=no port=8291 address=192.168.100.0/24,188.177.166.155
